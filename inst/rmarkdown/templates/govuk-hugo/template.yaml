@@ -1,0 +1,4 @@
+name: govuk-hugo
+description: >
+   Make documents for govuk-hugo sites
+create_dir: FALSE

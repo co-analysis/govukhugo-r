@@ -1,0 +1,4 @@
+^govuk-hugo-r\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^inst/hugo/govukhugo/.*$

@@ -1,0 +1,13 @@
+---
+title: "Template Title"
+date: 2021-01-01
+section: section
+---
+
+R Markdown files for govuk-hugo do not need an output format specified. Remember that you should not knit these files directly, instead use `build_govuk_hugo()` to process these files and incorporate them with the `govuk-hugo` theme.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Set the `section` in the YAML header to the sub-directory of the main content folder that you would like the processed page to exist in.

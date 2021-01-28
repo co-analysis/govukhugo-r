@@ -1,0 +1,33 @@
+baseURL: https://your.site/
+languageCode: en-gb
+title: Your site
+theme: govukhugo
+publishDir: docs
+canonifyurls: true
+
+pygmentsUseClasses: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    anchorLineNos: false
+    codeFences: true
+    guessSyntax: false
+    hl_Lines: ""
+    lineAnchors: ""
+    lineNoStart: 1
+    lineNos: true
+    lineNumbersInTable: true
+    noClasses: true
+    style: github
+    tabWidth: 2
+
+
+params:
+  govuk: false
+  logotext: AAA
+  product: Your site
+  phase: alpha
+  feedbackurl: https://your.site/feedback

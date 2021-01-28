@@ -1,0 +1,3 @@
+[submodule "inst/hugo/govukhugo"]
+	path = inst/hugo/govukhugo
+	url = https://github.com/co-analysis/govuk-hugo.git
