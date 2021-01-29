@@ -11,6 +11,8 @@ Authors@R:
 Description: A set of functions for applying the govuk-hugo theme 
   to hugo static sites and for rendering Rmarkdown documents.
 License: MIT + file LICENSE
+URL: https://github.com/co-analysis/govuk-hugo-r
+BugReports: https://github.com/co-analysis/govuk-hugo-r/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -23,4 +25,6 @@ Suggests:
     crosstalk,
     DT,
     plotly,
-    leaflet
+    leaflet,
+    knitr
+VignetteBuilder: knitr
