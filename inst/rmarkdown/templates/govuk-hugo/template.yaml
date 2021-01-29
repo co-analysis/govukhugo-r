@@ -1,4 +1,4 @@
-name: govuk-hugo
+name: GOV.UK page for Hugo
 description: >
    Make documents for govuk-hugo sites
 create_dir: FALSE

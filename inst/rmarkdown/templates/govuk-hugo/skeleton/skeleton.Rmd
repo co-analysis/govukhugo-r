@@ -1,7 +1,9 @@
 ---
-title: "Template Title"
+title: "Page title"
 date: 2021-01-01
 section: section
+weight: 100
+summary: "A short summary of the page"
 ---
 
 R Markdown files for govuk-hugo do not need an output format specified. Remember that you should not knit these files directly, instead use `build_govuk_hugo()` to process these files and incorporate them with the `govuk-hugo` theme.
@@ -11,3 +13,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 Set the `section` in the YAML header to the sub-directory of the main content folder that you would like the processed page to exist in.
+
+A default `weight` of 100 is set, change this to alter how pages are sorted in the navigation bar.
+
+It is recommended to provide a `summary` in the YAML header to make page lists easily readable.
