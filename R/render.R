@@ -13,9 +13,11 @@
 #' @param rmd_file the .rmd file to convert
 #' @param tmp_dir a temporary directory for processing
 #' @param out_dir override the default output directory
+#' @param quiet keep knitr quiet, defaults to TRUE, set to FALSE to see
+#' knitr messages
 #'
 #' @export
-render_rmd <- function(rmd_file, tmp_dir = tempdir(), out_dir = NULL) {
+render_rmd <- function(rmd_file, tmp_dir = tempdir(), out_dir = NULL, quiet = TRUE) {
 
   # extract the YAML front matter from the Rmd
   rmd_yml <- rmarkdown::yaml_front_matter(rmd_file)
@@ -40,7 +42,7 @@ render_rmd <- function(rmd_file, tmp_dir = tempdir(), out_dir = NULL) {
       df_print = "kable"
     ),
     output_file = file.path(tmp_dir, "content.html"),
-    quiet = TRUE
+    quiet = quiet
   )
 
   # hugo-ify the html

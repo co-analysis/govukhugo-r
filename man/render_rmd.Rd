@@ -4,7 +4,7 @@
 \alias{render_rmd}
 \title{Hugo-ify an R Markdown document}
 \usage{
-render_rmd(rmd_file, tmp_dir = tempdir(), out_dir = NULL)
+render_rmd(rmd_file, tmp_dir = tempdir(), out_dir = NULL, quiet = TRUE)
 }
 \arguments{
 \item{rmd_file}{the .rmd file to convert}
@@ -12,6 +12,9 @@ render_rmd(rmd_file, tmp_dir = tempdir(), out_dir = NULL)
 \item{tmp_dir}{a temporary directory for processing}
 
 \item{out_dir}{override the default output directory}
+
+\item{quiet}{keep knitr quiet, defaults to TRUE, set to FALSE to see
+knitr messages}
 }
 \description{
 Hugo is largely used to convert plain markdown files into HTML, but it also
