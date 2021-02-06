@@ -128,6 +128,9 @@ hugo_html <- function(rmd_html) {
   out_html <- gsub("&gt;", ">", out_html)
   out_html <- gsub("&lt;", "<", out_html)
 
+  # reset quotations
+  out_html <- gsub("&quot;", "\"", out_html)
+
   # replace <pre><code> with hugo highlight shortcode
   out_html <- gsub("<pre class=\"(r)\"><code>", "{{< highlight \\1 >}}", out_html)
   out_html <- gsub("<pre><code>", "{{< highlight txt >}}", out_html)
