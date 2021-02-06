@@ -8,7 +8,7 @@ The `{govukhugo}` package provides functions to use R Markdown files with the [`
 
 `govuk-hugo` is a theme that brings the GOV.UK design system to the Hugo static site builder. Hugo is used by blogdown, however `govuk-hugo` is not compatible with blogdown's processes for rendering Rmd files, hence the functions within the {govukhugo} package.
 
-Documentation is provided in the cross-package [`govuk-hugo-demo`](https://co-analysis.github.io/govuk-hugo-demo/) site.
+Online documentation is provided in the cross-package [`govuk-hugo-demo`](https://co-analysis.github.io/govuk-hugo-demo/) site.
 
 ## Installation
 
@@ -44,5 +44,6 @@ section: section
 ---
 ```
 
-section should be the sub-folder of the content directory that you want `build_govuk_hugo()` to render the Rmd file into.
+`section` should be the sub-folder of the content directory that you want `build_govuk_hugo()` to render the Rmd file into.
 
+More detailed documentation on working with R Markdown files is provided in the cross-package `govuk-hugo` [documentation](https://co-analysis.github.io/govuk-hugo-demo/section/rmarkdown/), along with tests of [static] and interactive R Markdown files.
