@@ -8,9 +8,11 @@ The `{govukhugo}` package provides functions to use R Markdown files with the [`
 
 `govuk-hugo` is a theme that brings the GOV.UK design system to the Hugo static site builder. Hugo is used by blogdown, however `govuk-hugo` is not compatible with blogdown's processes for rendering Rmd files, hence the functions within the {govukhugo} package.
 
+Documentation is provided in the cross-package [`govuk-hugo-demo`](https://co-analysis.github.io/govuk-hugo-demo/) site.
+
 ## Installation
 
-Note that both the `{govukhugo}` package and the `govuk-hugo` theme are still experimental works in progress. Extreme caution is advised.
+Note that both the `{govukhugo}` package and the `govuk-hugo` theme are still experimental works in progress, it should work on *nix (Mac/Linux) systems but has not yet been tested on Windows builds. Extreme caution is advised.
 
 You can install {govukhugo} as follows:
 
