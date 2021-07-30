@@ -19,12 +19,15 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
     rmarkdown,
-    rstudioapi
+    rstudioapi,
+    htmltools
 Suggests: 
     blogdown,
     crosstalk,
     DT,
     plotly,
     leaflet,
-    knitr
+    knitr,
+    ggplot2,
+    svglite
 VignetteBuilder: knitr
