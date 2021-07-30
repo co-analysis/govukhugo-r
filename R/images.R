@@ -67,6 +67,17 @@ render_svg <- function(plot, width, height, units = "mm",
   # create a temporary file
   svg_file <- paste0(tempfile(),".svg")
 
+  # check ggplot2 version
+  # if less than 3.3.5 convert px units to mm
+  # ggsave uses default dpi of 300
+  ggplot_version <- as.character(packageVersion("ggplot2"))
+
+  if ((units == "px") & (compareVersion(ggplot_version, "3.3.5") == -1)) {
+    width <- width * (25.4/300)
+    height <- height * (25.4/300)
+    units <- "mm"
+  }
+
   # render ggplot as an svg
   ggplot2::ggsave(svg_file, plot, device = "svg",
                   width = width, height = height, units = units)
