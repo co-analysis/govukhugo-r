@@ -8,10 +8,11 @@ render_svg(
   plot,
   width,
   height,
-  units = "mm",
+  units = "px",
   alt_title = NULL,
   alt_desc = NULL,
-  caption = NULL
+  caption = NULL,
+  dpi = 96
 )
 }
 \arguments{
@@ -21,7 +22,7 @@ render_svg(
 
 \item{height}{The desired height of the object}
 
-\item{units}{The units of width and height, default is mm}
+\item{units}{The units of width and height, default is px (pixels)}
 
 \item{alt_title}{Short alt text (will show as tool-tip)}
 
@@ -29,6 +30,9 @@ render_svg(
 
 \item{caption}{A caption to display to all users, can also be set to
 \code{"alt_title"} or \code{"alt_desc"} to match their value}
+
+\item{dpi}{Dots per inch, default of 96 for screen resolution, switch to
+300 if using physical units (mm, cm or inches)}
 }
 \description{
 \code{render_svg()} converts ggplot2 objects to SVG code to render them as in-line

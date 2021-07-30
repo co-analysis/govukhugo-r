@@ -24,15 +24,18 @@
 #' @param plot A [ggplot2::ggplot()] object
 #' @param width The desired width of the object
 #' @param height The desired height of the object
-#' @param units The units of width and height, default is mm
+#' @param units The units of width and height, default is px (pixels)
 #' @param alt_title Short alt text (will show as tool-tip)
 #' @param alt_desc Longer alt text (embedded within SVG)
 #' @param caption A caption to display to all users, can also be set to
 #'                `"alt_title"` or `"alt_desc"` to match their value
+#' @param dpi Dots per inch, default of 96 for screen resolution, switch to
+#'            300 if using physical units (mm, cm or inches)
 #'
 #' @export
-render_svg <- function(plot, width, height, units = "mm",
-                       alt_title = NULL, alt_desc = NULL, caption = NULL) {
+render_svg <- function(plot, width, height, units = "px",
+                       alt_title = NULL, alt_desc = NULL, caption = NULL,
+                       dpi = 96) {
 
   # {ggplot2} is in suggests to reduce install bloat
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
@@ -69,18 +72,19 @@ render_svg <- function(plot, width, height, units = "mm",
 
   # check ggplot2 version
   # if less than 3.3.5 convert px units to mm
-  # ggsave uses default dpi of 300
   ggplot_version <- as.character(packageVersion("ggplot2"))
 
-  if ((units == "px") & (compareVersion(ggplot_version, "3.3.5") == -1)) {
-    width <- width * (25.4/300)
-    height <- height * (25.4/300)
-    units <- "mm"
+  if (compareVersion(ggplot_version, "3.3.5") == -1) {
+    if (units == "px") {
+      width <- width * (25.4/dpi)
+      height <- height * (25.4/dpi)
+      units <- "mm"
+    }
   }
 
   # render ggplot as an svg
   ggplot2::ggsave(svg_file, plot, device = "svg",
-                  width = width, height = height, units = units)
+                  width = width, height = height, units = units, dpi = dpi)
 
   # read the svg, drop the DOCTYPE declaration
   x <- readLines(svg_file)[-1]
