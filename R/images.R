@@ -69,7 +69,7 @@ render_svg <- function(plot, width, height, units = "mm",
 
   # render ggplot as an svg
   ggplot2::ggsave(svg_file, plot, device = "svg",
-                  width = width, height = height, units = "mm")
+                  width = width, height = height, units = units)
 
   # read the svg, drop the DOCTYPE declaration
   x <- readLines(svg_file)[-1]
