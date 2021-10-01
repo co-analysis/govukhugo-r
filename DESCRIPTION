@@ -20,7 +20,8 @@ RoxygenNote: 7.1.1
 Imports: 
     rmarkdown,
     rstudioapi,
-    htmltools
+    htmltools,
+    R.utils
 Suggests: 
     blogdown,
     crosstalk,

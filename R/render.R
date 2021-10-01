@@ -29,7 +29,7 @@ render_rmd <- function(rmd_file, tmp_dir = tempdir(), out_dir = NULL, quiet = TR
   new_yml <- append(new_yml, c("rmarkdown" = "true"))
 
   # copy rmd to a temporary folder
-  tmp_rmd <- file.path(tmp_dir, basename(rmd_file))
+  tmp_rmd <- file.path(tmp_dir, "Rmd", basename(rmd_file))
   file.copy(rmd_file, tmp_rmd, overwrite = TRUE)
 
   # render the rmd to html

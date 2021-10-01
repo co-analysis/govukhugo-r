@@ -17,6 +17,23 @@ build_hugo_rmd <- function(rmd_folder = "R/Rmd") {
   # set a common temp directory
   tmp_dir <- tempdir()
 
+  # create Rmd processing sub-folder
+  if (!dir.exists(file.path(tmp_dir, "Rmd"))) {
+    dir.create(file.path(tmp_dir, "Rmd"))
+  }
+
+  # create data processing sub-folder
+  if (!dir.exists(file.path(tmp_dir, "data"))) {
+    dir.create(file.path(tmp_dir, "data"))
+  }
+
+  # if R/data exists copy to the tmp_dir
+  if (dir.exists("R/data")) {
+    R.utils::copyDirectory("R/data",
+                           file.path(tmp_dir, "data"),
+                           overwrite = TRUE)
+  }
+
   # render files
   for (rmd in rmd_files) {
     render_rmd(rmd, tmp_dir = tmp_dir)
