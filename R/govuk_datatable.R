@@ -10,6 +10,7 @@
 #' @param small_text whether to render the table content with a smaller font
 #' @param buttons whether to include copy and download buttons
 #' @param col_defs optionally, a list of column definitions
+#' @param options optionally, a list of additional options to pass to [DT::datatable()]
 #'
 #' @export
 govuk_datatable <- function(data,
@@ -18,7 +19,8 @@ govuk_datatable <- function(data,
                             page_length = 10,
                             small_text = FALSE,
                             buttons = TRUE,
-                            col_defs = NULL) {
+                            col_defs = NULL,
+                            options = NULL) {
 
   if (!requireNamespace("DT", quietly = TRUE)) {
     stop(
@@ -55,6 +57,10 @@ govuk_datatable <- function(data,
 
   if (!is.null(col_defs)) {
     dt_options <- append(dt_options, list(columnDefs = col_defs))
+  }
+
+  if (!is.null(options)) {
+    dt_options <- append(dt_options, options)
   }
 
   x <- DT::datatable(data,
