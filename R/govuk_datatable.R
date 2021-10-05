@@ -17,6 +17,7 @@ govuk_datatable <- function(data,
                             element_id = NULL,
                             col_names = NULL,
                             page_length = 10,
+                            search = TRUE,
                             small_text = FALSE,
                             buttons = TRUE,
                             col_defs = NULL,
@@ -46,12 +47,19 @@ govuk_datatable <- function(data,
 
   dt_options <- list(pageLength = page_length)
 
-  if (buttons) {
+  if (buttons & search) {
     dt_options <- append(dt_options, list(buttons = list("copy", "csv")))
     dt_options <- append(dt_options, list(dom = "<f><t><\"govuk_dt_footer\"B<\"govuk_dt_nav\"ip>>"))
     dt_extensions <- "Buttons"
-  } else {
+  } else if (!buttons & search) {
     dt_options <- append(dt_options, list(dom = "<f><t><\"govuk_dt_footer\"<\"govuk_dt_nav\"ip>>"))
+    dt_extensions <- character()
+  } else if (buttons & !search) {
+    dt_options <- append(dt_options, list(buttons = list("copy", "csv")))
+    dt_options <- append(dt_options, list(dom = "<t><\"govuk_dt_footer\"B<\"govuk_dt_nav\"ip>>"))
+    dt_extensions <- "Buttons"
+  } else {
+    dt_options <- append(dt_options, list(dom = "<t><\"govuk_dt_footer\"<\"govuk_dt_nav\"ip>>"))
     dt_extensions <- character()
   }
 
