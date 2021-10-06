@@ -141,8 +141,9 @@ render_svg <- function(plot, width, height, units = "px",
     }
 
     # collapse SVG block and add caption
-    out_chunk <- paste(c(paste(new_svg, sep = "\n"),
-                         paste("<figcaption>", caption, "</figcaption>", sep = "")),
+    out_chunk <- paste(c(paste("<figcaption class=\"govuk-heading-m\">",
+                               caption, "</figcaption>", sep = ""),
+                         paste(new_svg, sep = "\n")),
                        collapse = "\n"
                        )
 
