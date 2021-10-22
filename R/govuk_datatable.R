@@ -30,8 +30,9 @@ govuk_datatable <- function(data,
     )
   }
 
-  if (!is.data.frame(data) & !is.matrix(data)) {
-    stop("data must be a data frame or matrix")
+  if (!is.data.frame(data) & !is.matrix(data) &
+      !crosstalk::is.SharedData(data)) {
+    stop("data must be a data frame, matrix or crosstalk::SharedData")
   }
 
 
