@@ -9,9 +9,11 @@ govuk_datatable(
   element_id = NULL,
   col_names = NULL,
   page_length = 10,
+  search = TRUE,
   small_text = FALSE,
   buttons = TRUE,
-  col_defs = NULL
+  col_defs = NULL,
+  options = NULL
 )
 }
 \arguments{
@@ -28,6 +30,8 @@ govuk_datatable(
 \item{buttons}{whether to include copy and download buttons}
 
 \item{col_defs}{optionally, a list of column definitions}
+
+\item{options}{optionally, a list of additional options to pass to \code{\link[DT:datatable]{DT::datatable()}}}
 }
 \description{
 \code{govuk_datatable} is a wrapper for \code{\link[DT:datatable]{DT::datatable()}} that will enable the
