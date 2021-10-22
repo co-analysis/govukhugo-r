@@ -16,15 +16,15 @@ BugReports: https://github.com/co-analysis/govuk-hugo-r/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports: 
     rmarkdown,
     rstudioapi,
     htmltools,
-    R.utils
+    R.utils,
+    crosstalk
 Suggests: 
     blogdown,
-    crosstalk,
     DT,
     plotly,
     leaflet,
