@@ -39,7 +39,8 @@ render_rmd <- function(rmd_file, tmp_dir = tempdir(), out_dir = NULL, quiet = TR
       theme = NULL,
       mathjax = NULL,
       self_contained = TRUE,
-      df_print = "kable"
+      df_print = "kable",
+      md_extensions = "-smart"
     ),
     output_file = file.path(tmp_dir, "content.html"),
     quiet = quiet
