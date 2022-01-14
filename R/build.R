@@ -10,6 +10,13 @@
 #' @export
 build_hugo_rmd <- function(rmd_folder = "R/Rmd") {
 
+  # get the MD5 checksums log
+  if (file.exists(file.path(rmd_folder, "rmd.log"))) {
+    rmd_log <- readLines(file.path(rmd_folder, "rmd.log"))
+  } else {
+    rmd_log <- NULL
+  }
+
   # get rmd files
   rmd_files <- dir(rmd_folder, pattern = "\\.Rmd", full.names = TRUE,
                    recursive = TRUE)
@@ -36,8 +43,20 @@ build_hugo_rmd <- function(rmd_folder = "R/Rmd") {
 
   # render files
   for (rmd in rmd_files) {
-    render_rmd(rmd, tmp_dir = tmp_dir)
+
+    # if md5sum unchanged don't render
+    if (check_md5(rmd, rmd_log)) {
+      message(rmd, " unchanged, skipping hugo-ification")
+    } else {
+      render_rmd(rmd, tmp_dir = tmp_dir)
+    }
+
   }
+
+  # re-generate hash values and write to log
+  new_hashes <- tools::md5sum(rmd_files)
+  out_hashes <- paste0(rmd_files, ": ", new_hashes)
+  writeLines(out_hashes, file.path(rmd_folder, "rmd.log"))
 
 }
 
@@ -59,5 +78,18 @@ build_hugo <- function(with_rmd = TRUE, rmd_folder = "R/Rmd") {
 
   # call hugo
   system("hugo")
+
+}
+
+# function to check the md5sum of an rmd file against log
+check_md5 <- function(file, hash_log) {
+
+  if (is.null(hash_log)) {
+    FALSE
+  } else {
+    rmd_hash <- gsub(paste0("^", file, ": "), "", hash_log[grepl(file, hash_log)])
+    new_hash <- tools::md5sum(file)
+    rmd_hash == new_hash
+  }
 
 }
