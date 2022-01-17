@@ -54,6 +54,8 @@ init_govuk_hugo <- function() {
   config_template <- system.file("hugo", "config.yaml", package = "govukhugo")
   file.copy(config_template, "config.yaml", overwrite = TRUE)
 
+  message("Adding govukhugo theme")
+
   # should the theme be added as a submodule
   if (git_in_use) {
     theme_submodule <- utils::menu(
@@ -73,17 +75,29 @@ init_govuk_hugo <- function() {
 
   } else {
 
-    theme_zip <- system.file("hugo", "gouvukhugo.zip", package = "govukhugo")
+    theme_download <- utils::menu(
+      choices = c("Yes",
+                  "No"),
+      title = "You are not using git. Do you want to download and install the theme?")
 
-    utils::unzip(theme_zip, exdir = "themes")
-
-    message("govuk-hugo theme copied to themes/govukhugo")
+    if (theme_download == 1) {
+      tmp_theme <- tempfile()
+      download.file("https://github.com/co-analysis/govuk-hugo/archive/refs/heads/main.zip",
+                    destfile = tmp_theme)
+      utils::unzip(tmp_theme, exdir = "themes")
+      fs::file_move("themes/govuk-hugo-main", "themes/govukhugo")
+    } else{
+      message("Visit https://github.com/co-analysis/govuk-hugo/ to download the theme/n",
+              " 1. Extract the zip file",
+              " 2. Copy the extracted folder to the themes folder",
+              " 3. Rename the folder from 'govuk-hugo-main' to 'govukhugo'")
+    }
 
   }
 
   # create a folder for saving Rmd files to
   if (!dir.exists("R/Rmd")) {
-    dir.create("R/Rmd")
+    dir.create("R/Rmd", recursive = TRUE)
   }
 
   # open the config file to edit

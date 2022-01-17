@@ -22,7 +22,8 @@ Imports:
     rstudioapi,
     htmltools,
     R.utils,
-    crosstalk
+    crosstalk,
+    fs
 Suggests: 
     blogdown,
     DT,
