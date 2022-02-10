@@ -4,7 +4,7 @@
 \alias{build_hugo_rmd}
 \title{Bulk Hugo-ify Rmd files}
 \usage{
-build_hugo_rmd(rmd_folder = "R/Rmd")
+build_hugo_rmd(rmd_folder = "R/Rmd", rebuild = FALSE)
 }
 \arguments{
 \item{rmd_folder}{path to the folder containing Rmd files}

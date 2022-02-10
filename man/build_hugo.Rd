@@ -4,7 +4,7 @@
 \alias{build_hugo}
 \title{Build a Hugo site}
 \usage{
-build_hugo(with_rmd = TRUE, rmd_folder = "R/Rmd")
+build_hugo(with_rmd = TRUE, rmd_folder = "R/Rmd", rebuild = FALSE)
 }
 \arguments{
 \item{with_rmd}{logical flag for whether to build Rmd files}
