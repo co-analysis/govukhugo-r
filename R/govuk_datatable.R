@@ -46,6 +46,14 @@ govuk_datatable <- function(data,
     col_names <- names(data)
   }
 
+  if (crosstalk::is.SharedData(data)) {
+    col_names <- names(data$data())
+    nr <- nrow(data$data())
+  } else {
+    col_names <- names(data)
+    nr <- nrow(data)
+  }
+
   dt_options <- list(pageLength = page_length)
 
   dt_buttons_spec <- list(
@@ -56,21 +64,36 @@ govuk_datatable <- function(data,
     )
   )
 
-  if (buttons & search) {
-    dt_options <- append(dt_options, list(buttons = dt_buttons_spec))
-    dt_options <- append(dt_options, list(dom = "<f><\"govuk_dt_table\"t><\"govuk_dt_nav\"piB>"))
-    dt_extensions <- "Buttons"
-  } else if (!buttons & search) {
-    dt_options <- append(dt_options, list(dom = "<f><\"govuk_dt_table\"t><\"govuk_dt_nav\"pi>"))
-    dt_extensions <- character()
-  } else if (buttons & !search) {
-    dt_options <- append(dt_options, list(buttons = dt_buttons_spec))
-    dt_options <- append(dt_options, list(dom = "<\"govuk_dt_table\"t><\"govuk_dt_nav\"piB>"))
-    dt_extensions <- "Buttons"
+  if (nr < page_length) {
+    dom_pi <- ""
   } else {
-    dt_options <- append(dt_options, list(dom = "<\"govuk_dt_table\"t><\"govuk_dt_nav\"pi>"))
+    dom_pi <- "pi"
+  }
+
+  if (buttons) {
+    dt_options <- append(dt_options, list(buttons = dt_buttons_spec))
+    dt_extensions <- "Buttons"
+    dom_buttons <- "B"
+  } else {
+    dom_buttons <- ""
     dt_extensions <- character()
   }
+
+  dom_nav <- paste0(dom_pi, dom_buttons)
+
+  if (length(dom_nav) != 0) {
+    dom_nav <- paste0("<\"govuk_dt_nav\"", dom_nav, ">")
+  }
+
+  if (search) {
+    dom_search <- "<\"govuk_dt_search\"f>"
+  } else {
+    dom_search <- ""
+  }
+
+  dom_full <- paste0(dom_search, "<\"govuk_dt_table\"t>", dom_nav)
+
+  dt_options <- append(dt_options, list(dom = dom_full))
 
   if (!is.null(col_defs)) {
     dt_options <- append(dt_options, list(columnDefs = col_defs))
