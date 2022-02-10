@@ -2,6 +2,7 @@
 
 export(build_hugo)
 export(build_hugo_rmd)
+export(clear_filters)
 export(govuk_datatable)
 export(init_govuk_hugo)
 export(render_rmd)

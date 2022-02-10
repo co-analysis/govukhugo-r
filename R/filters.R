@@ -5,9 +5,7 @@
 #'
 #' @param x a crosstalk component, such as [`crosstalk::filter_select()`]
 #'
-#' @return
-#'
-#' The component `x` but with any `"boostrap"` dependency removed from its
+#' @return The component `x` but with any `"boostrap"` dependency removed from its
 #' `html_dependencies` attribute.
 #'
 #' @examples
@@ -35,4 +33,21 @@ unstrap <- function(x) {
   x
 }
 
+
+#' Clear crosstalk filters
+#'
+#' Insert a "clear filters" option to a set of filter controls. This adds an
+#' HTML `div` element that works with jQuery in govukhugo to clear crosstalk
+#' filters on a page, note that this clears all filters on a page including
+#' any DT search boxes.
+#'
+#' @param text The text to display (defaults to "Clear filters")
+#'
+#' @export
+clear_filters <- function(text = "Clear filters") {
+  htmltools::div(
+    id = "clear-filters", class = "govuk-!-font-size-14",
+    text
+  )
+}
 
