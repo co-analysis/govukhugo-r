@@ -154,7 +154,7 @@ render_svg <- function(plot, width, height, units = "px",
 
   # render as an HTML object and wrap in a <figure> tag
   out_html <- htmltools::HTML(
-    paste(c(paste("<figure id='", unique_id, "-figure'>", sep = ""),
+    paste(c(paste("<figure id=\"", unique_id, "-figure\", class=\"govuk_chart\">", sep = ""),
             out_chunk,
             "</figure>"),
           collapse = "\n"
