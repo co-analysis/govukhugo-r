@@ -48,19 +48,27 @@ govuk_datatable <- function(data,
 
   dt_options <- list(pageLength = page_length)
 
+  dt_buttons_spec <- list(
+    "copy",
+    list(
+      extend = "csv",
+      text = "Download"
+    )
+  )
+
   if (buttons & search) {
-    dt_options <- append(dt_options, list(buttons = list("copy", "csv")))
-    dt_options <- append(dt_options, list(dom = "<f><t><\"govuk_dt_footer\"B<\"govuk_dt_nav\"ip>>"))
+    dt_options <- append(dt_options, list(buttons = dt_buttons_spec))
+    dt_options <- append(dt_options, list(dom = "<f><\"govuk_dt_table\"t><\"govuk_dt_nav\"piB>"))
     dt_extensions <- "Buttons"
   } else if (!buttons & search) {
-    dt_options <- append(dt_options, list(dom = "<f><t><\"govuk_dt_footer\"<\"govuk_dt_nav\"ip>>"))
+    dt_options <- append(dt_options, list(dom = "<f><\"govuk_dt_table\"t><\"govuk_dt_nav\"pi>"))
     dt_extensions <- character()
   } else if (buttons & !search) {
-    dt_options <- append(dt_options, list(buttons = list("copy", "csv")))
-    dt_options <- append(dt_options, list(dom = "<t><\"govuk_dt_footer\"B<\"govuk_dt_nav\"ip>>"))
+    dt_options <- append(dt_options, list(buttons = dt_buttons_spec))
+    dt_options <- append(dt_options, list(dom = "<\"govuk_dt_table\"t><\"govuk_dt_nav\"piB>"))
     dt_extensions <- "Buttons"
   } else {
-    dt_options <- append(dt_options, list(dom = "<t><\"govuk_dt_footer\"<\"govuk_dt_nav\"ip>>"))
+    dt_options <- append(dt_options, list(dom = "<\"govuk_dt_table\"t><\"govuk_dt_nav\"pi>"))
     dt_extensions <- character()
   }
 
