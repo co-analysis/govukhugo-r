@@ -38,13 +38,14 @@ govuk_datatable <- function(data,
     stop("data must be a data frame, matrix or crosstalk::SharedData")
   }
 
-
+  # Set table classes
   if (small_text) {
     dt_class <- "govuk-table govuk-!-font-size-14"
   } else {
     dt_class <- "govuk-table"
   }
 
+  # get names of the data frame and size
   if (crosstalk::is.SharedData(data)) {
     data_names <- names(data$data())
     nr <- nrow(data$data())
@@ -57,8 +58,10 @@ govuk_datatable <- function(data,
     col_names <- data_names
   }
 
+  # hard-code page length
   dt_options <- list(pageLength = page_length)
 
+  # define copy specifications
   if (!is.null(copy_info)) {
     copy_spec <- list(
       extend = "copy",
@@ -68,11 +71,13 @@ govuk_datatable <- function(data,
     copy_spec <- "copy"
   }
 
+  # define csv specifications
   csv_spec <- list(
     extend = "csv",
     text = "Download"
   )
 
+  # add filename if provided
   if (!is.null(export_file)) {
 
     if (tolower(tools::file_ext(export_file)) != "csv") {
@@ -83,17 +88,13 @@ govuk_datatable <- function(data,
 
   }
 
+  # combine button specs
   dt_buttons_spec <- list(
     copy_spec,
     csv_spec
   )
 
-  if (nr < page_length) {
-    dom_pi <- ""
-  } else {
-    dom_pi <- "pi"
-  }
-
+  # define button specifications
   if (buttons) {
     dt_options <- append(dt_options, list(buttons = dt_buttons_spec))
     dt_extensions <- "Buttons"
@@ -103,22 +104,33 @@ govuk_datatable <- function(data,
     dt_extensions <- character()
   }
 
+  # hide pagination/table info if single page
+  if (nr < page_length) {
+    dom_pi <- ""
+  } else {
+    dom_pi <- "pi"
+  }
+
+  # navigation dom elements
   dom_nav <- paste0(dom_pi, dom_buttons)
 
+  # wrap navigation elements in named div
   if (length(dom_nav) != 0) {
     dom_nav <- paste0("<\"govuk_dt_nav\"", dom_nav, ">")
   }
 
+  # wrap search in own div
   if (search) {
     dom_search <- "<\"govuk_dt_search\"f>"
   } else {
     dom_search <- ""
   }
 
+  # combine dom elements and add to options
   dom_full <- paste0(dom_search, "<\"govuk_dt_table\"t>", dom_nav)
-
   dt_options <- append(dt_options, list(dom = dom_full))
 
+  # add col_defs to options
   if (!is.null(col_defs)) {
     dt_options <- append(dt_options, list(columnDefs = col_defs))
   }
@@ -127,6 +139,7 @@ govuk_datatable <- function(data,
     dt_options <- append(dt_options, options)
   }
 
+  # build table
   x <- DT::datatable(data,
                      style = "jqueryui",
                      caption = title,
