@@ -14,6 +14,7 @@
 #'
 #' @export
 govuk_datatable <- function(data,
+                            title = NULL,
                             element_id = NULL,
                             col_names = NULL,
                             page_length = 10,
@@ -21,6 +22,8 @@ govuk_datatable <- function(data,
                             small_text = FALSE,
                             buttons = TRUE,
                             col_defs = NULL,
+                            copy_info = NULL,
+                            export_file = NULL,
                             options = NULL) {
 
   if (!requireNamespace("DT", quietly = TRUE)) {
@@ -42,26 +45,47 @@ govuk_datatable <- function(data,
     dt_class <- "govuk-table"
   }
 
-  if (is.null(col_names)) {
-    col_names <- names(data)
-  }
-
   if (crosstalk::is.SharedData(data)) {
-    col_names <- names(data$data())
+    data_names <- names(data$data())
     nr <- nrow(data$data())
   } else {
-    col_names <- names(data)
+    data_names <- names(data)
     nr <- nrow(data)
+  }
+
+  if (is.null(col_names)) {
+    col_names <- data_names
   }
 
   dt_options <- list(pageLength = page_length)
 
-  dt_buttons_spec <- list(
-    "copy",
-    list(
-      extend = "csv",
-      text = "Download"
+  if (!is.null(copy_info)) {
+    copy_spec <- list(
+      extend = "copy",
+      title = copy_info
     )
+  } else {
+    copy_spec <- "copy"
+  }
+
+  csv_spec <- list(
+    extend = "csv",
+    text = "Download"
+  )
+
+  if (!is.null(export_file)) {
+
+    if (tolower(tools::file_ext(export_file)) != "csv") {
+      export_file <- paste0(tools::file_path_sans_ext(export_file), ".csv")
+    }
+
+    csv_spec <- append(csv_spec, list(filename = export_file))
+
+  }
+
+  dt_buttons_spec <- list(
+    copy_spec,
+    csv_spec
   )
 
   if (nr < page_length) {
@@ -105,6 +129,7 @@ govuk_datatable <- function(data,
 
   x <- DT::datatable(data,
                      style = "jqueryui",
+                     caption = title,
                      class = dt_class,
                      elementId = element_id,
                      selection = "none",
