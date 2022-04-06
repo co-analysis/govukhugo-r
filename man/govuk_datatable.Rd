@@ -6,6 +6,7 @@
 \usage{
 govuk_datatable(
   data,
+  title = NULL,
   element_id = NULL,
   col_names = NULL,
   page_length = 10,
@@ -13,6 +14,8 @@ govuk_datatable(
   small_text = FALSE,
   buttons = TRUE,
   col_defs = NULL,
+  copy_info = NULL,
+  export_file = NULL,
   options = NULL
 )
 }
