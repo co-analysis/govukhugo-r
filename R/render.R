@@ -148,6 +148,10 @@ hugo_html <- function(rmd_html) {
       "http://github.com/co-analysis/govuk-hugo-r/issues."))
   }
 
+  # hack plotly size fixing
+  plotly_lines <- which(grepl("class=\"plotly", out_html))
+  out_html[plotly_lines] <- gsub("style=.*class", "class", out_html[plotly_lines])
+
   return(out_html)
 
 }
