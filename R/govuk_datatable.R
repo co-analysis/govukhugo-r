@@ -28,8 +28,8 @@ govuk_datatable <- function(data,
 
   if (!requireNamespace("DT", quietly = TRUE)) {
     stop(
-      "The DT package is required. ",
-      "Install from CRAN using install.packages(\"DT\")"
+      "The {DT} package is required to run govuk_datatable().",
+      call. = FALSE
     )
   }
 

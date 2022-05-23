@@ -40,13 +40,13 @@ render_svg <- function(plot, width, height, units = "px",
   # {ggplot2} is in suggests to reduce install bloat
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     stop("render_svg() requires package {ggplot2} to be installed.",
-         call. = FALSE, )
+         call. = FALSE)
   }
 
   # {svglite} is in suggests to reduce install bloat
   if (!requireNamespace("svglite", quietly = TRUE)) {
     stop("render_svg() requires package {svglite} to be installed.",
-         call. = FALSE, )
+         call. = FALSE)
   }
 
   # warn if no alt text provided
