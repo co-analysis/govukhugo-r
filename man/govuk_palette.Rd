@@ -11,7 +11,7 @@ govuk_palette(pal = "categorical")
 \code{blyl}, \code{putq}, or a colour name from \code{govuk_colours}}
 }
 \value{
-
+A set of hexadecimal colours
 }
 \description{
 Access the GOV.UK design system colour palette

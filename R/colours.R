@@ -111,9 +111,16 @@ govuk_divergents <- list(
 #' @param pal One of `categorical` (the default), `blue`, `blrd`, `bldrd_dark`,
 #' `blyl`, `putq`, or a colour name from `govuk_colours`
 #'
-#' @return
+#' @return A set of hexadecimal colours
 #' @export
 govuk_palette <- function(pal = "categorical") {
+
+  if (!requireNamespace("scales", quietly = TRUE)) {
+    stop(
+      "The {scales} package is required for govuk_palette()",
+      call. = FALSE
+    )
+  }
 
   if (pal == "categorical") {
     out_pal <- unname(govuk_categorical_palette)
