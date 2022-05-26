@@ -138,8 +138,8 @@ hugo_html <- function(rmd_html) {
   out_html <- gsub("</code></pre>", "{{< /highlight >}}", out_html)
 
   # extract html excluding title/date lines
-  # if not next to each other throw an error
-  if (date_line - title_line == 3) {
+  # date_line needs to be after title_line
+  if (date_line > title_line) {
     out_html <- out_html[c(body_start:title_line, date_line:body_end)]
   } else {
     stop(paste(
