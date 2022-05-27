@@ -4,7 +4,13 @@
 \alias{new_rmd}
 \title{Open a new editor with the Rmarkdown skeleton}
 \usage{
-new_rmd()
+new_rmd(
+  title = NULL,
+  date = NULL,
+  section = NULL,
+  weight = NULL,
+  summary = NULL
+)
 }
 \description{
 The govukhugo package includes a skeleton Rmarkdown file,
