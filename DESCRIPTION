@@ -23,7 +23,9 @@ Imports:
     htmltools,
     R.utils,
     crosstalk,
-    fs
+    fs,
+    cli,
+    here
 Suggests: 
     blogdown,
     DT,
