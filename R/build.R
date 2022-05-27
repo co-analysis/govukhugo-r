@@ -37,12 +37,16 @@ build_hugo_rmd <- function(rmd_folder = "R/Rmd", rebuild = FALSE) {
 
   if (rebuild == TRUE) {
     no_build <- FALSE
-    message("Site rebuild requested, unchanged Rmd files will undergo hugo-ification")
+    cli::cli_alert_warning(
+      "Site rebuild requested, all Rmd files will be re-processed"
+    )
   }
 
   if (no_build) {
-    message("All Rmarkdown files unchanged, skipping hugo-ification")
-    return(NULL)
+    cli::cli_alert_info(
+      "All Rmd files are unchanged, skipping hugo processing"
+    )
+    return(invisible(NULL))
   }
 
   # set a common temp directory
@@ -60,28 +64,56 @@ build_hugo_rmd <- function(rmd_folder = "R/Rmd", rebuild = FALSE) {
 
   # if R/data exists copy to the tmp_dir
   if (dir.exists("R/data")) {
-    R.utils::copyDirectory("R/data",
+    R.utils::copyDirectory("~/r/acses-example/R/data",
                            file.path(tmp_dir, "data"),
                            overwrite = TRUE)
   }
+
+  unchanged_files <- 0
+  processed_out <- character(0)
+  processed_rmd <- character(0)
+
+  cli::cli_progress_bar("Processing Rmd files", total = length(rmd_files), )
 
   # render files
   for (rmd in rmd_files) {
 
     # if md5sum unchanged don't render
-    if (rebuild) {
-      render_rmd(rmd, tmp_dir = tmp_dir)
-    } else if (check_md5(rmd, rmd_log)) {
-      message(rmd, " unchanged, skipping hugo-ification")
+    if (rebuild | !govukhugo:::check_md5(rmd, rmd_log)) {
+      out <- govukhugo::render_rmd(rmd, tmp_dir = tmp_dir)
+      processed_out <- c(processed_out, out)
+      processed_rmd <- c(processed_rmd, rmd)
     } else {
-      render_rmd(rmd, tmp_dir = tmp_dir)
+      unchanged_files <- unchanged_files + 1
     }
 
+    cli::cli_progress_update()
+
   }
+
+  cli::cli_progress_done()
 
   # re-generate hash values and write to log
   out_hashes <- paste0(rmd_files, ": ", new_hashes)
   writeLines(out_hashes, file.path(rmd_folder, "rmd.log"))
+
+  processed_files <- processed_out
+  names(processed_files) <- gsub(paste0(rmd_folder,"/"), "", processed_rmd)
+
+  cli::cli({
+    cli::cli_status_clear()
+    cli::cli_h1("Hugo processing complete")
+    cli::cli_alert_info("{unchanged_files}{cli::qty(unchanged_files)} Rmd file{?s} {?was/were} unchanged and skipped processing for govukhugo")
+    cli::cli_alert_success("{length(processed_files)}{cli::qty(processed_files)} Rmd file{?s} {?was/were} processed for govukhugo")
+    if (length(processed_files) > 0 & length(names(processed_files)) > 0) {
+      cli::cli({
+        cli::cli_h2("Processed files")
+        cli::cli_dl(processed_files)
+      })
+    }
+  })
+
+  return(invisible(processed_files))
 
 }
 

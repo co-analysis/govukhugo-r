@@ -84,7 +84,7 @@ render_rmd <- function(rmd_file, tmp_dir = tempdir(), out_dir = NULL, quiet = TR
   # copy the html to the outdir and inform user
   out_file <- paste0(out_dir, basename(tmp_out))
   file.copy(tmp_out, out_file, overwrite = TRUE)
-  message(rmd_file, " hugo-ified as: ", out_file)
+  return(out_file)
 
 }
 
@@ -142,8 +142,8 @@ hugo_html <- function(rmd_html) {
   if (date_line > title_line) {
     out_html <- out_html[c(body_start:title_line, date_line:body_end)]
   } else {
-    stop(paste(
-      "Title and date lines are not next to each other.",
+    cli::cli_abort(
+      x = paste("Title and date lines are not next to each other.",
       "This is an unexpected problem, please report it at:",
       "http://github.com/co-analysis/govuk-hugo-r/issues."))
   }
