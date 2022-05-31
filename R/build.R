@@ -133,6 +133,8 @@ build_hugo <- function(with_rmd = TRUE, rmd_folder = "R/Rmd", rebuild = FALSE) {
     build_hugo_rmd(rmd_folder, rebuild)
   }
 
+  cli::cli_h1("Building Hugo site")
+
   # call hugo
   system("hugo")
 
