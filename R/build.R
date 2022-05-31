@@ -15,9 +15,11 @@ build_hugo_rmd <- function(rmd_folder = "R/Rmd", rebuild = FALSE) {
                    recursive = TRUE)
 
   if (length(rmd_files) == 0) {
-    message("No Rmarkdown files detected")
-    return(NULL)
+    cli::cli_alert_info("No Rmarkdown files detected")
+    return(invisible(NULL))
   }
+
+  cli::cli_h1("Start Hugo processing")
 
   # get the MD5 checksums log
   if (file.exists(file.path(rmd_folder, "rmd.log"))) {
@@ -105,7 +107,7 @@ build_hugo_rmd <- function(rmd_folder = "R/Rmd", rebuild = FALSE) {
     cli::cli_h1("Hugo processing complete")
     cli::cli_alert_info("{unchanged_files}{cli::qty(unchanged_files)} Rmd file{?s} {?was/were} unchanged and skipped processing for govukhugo")
     cli::cli_alert_success("{length(processed_files)}{cli::qty(processed_files)} Rmd file{?s} {?was/were} processed for govukhugo")
-    if (length(processed_files) > 0 & length(names(processed_files)) > 0) {
+    if (length(processed_files) > 0) {
       cli::cli({
         cli::cli_h2("Processed files")
         cli::cli_dl(processed_files)
