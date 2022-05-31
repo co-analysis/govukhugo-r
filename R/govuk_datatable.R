@@ -105,7 +105,7 @@ govuk_datatable <- function(data,
   }
 
   # hide pagination/table info if single page
-  if (nr < page_length) {
+  if (nr <= page_length) {
     dom_pi <- ""
   } else {
     dom_pi <- "pi"
