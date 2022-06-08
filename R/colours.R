@@ -122,23 +122,43 @@ govuk_palette <- function(pal = "categorical") {
     )
   }
 
+  valid_pals <- c("categorical", "blues", names(govuk_divergents))
+  cli_pals <- cli::cli_vec(valid_pals, style = list(vec_last = ", "))
+
+  pal_is_valid <- FALSE
+
+  if (pal %in% valid_pals) {
+    pal_is_valid <- TRUE
+  } else if (pal == "chart-white") {
+    cli::cli_abort(
+      c("The value supplied to {.arg pal} is not valid",
+        x = "{.arg pal} cannot be {.val chart-white}"
+      )
+    )
+  } else if (pal %in% names(govuk_colours)) {
+    pal_is_valid <- TRUE
+  }
+
+  if (!pal_is_valid) {
+    cli::cli_abort(
+      c("The value supplied to {.arg pal} is not valid",
+        x = "You supplied {.val {pal}}",
+        i = paste0("{.arg pal} must be one of {cli_pals} or a name from ",
+                   "{.fun govuk_colours} (but not chart-white).")
+        )
+    )
+  }
+
   if (pal == "categorical") {
     out_pal <- unname(govuk_categorical_palette)
-  } else if (pal == "blue") {
+  } else if (pal == "blues") {
     out_pal <- unname(govuk_sequential_blue)
-  } else {
-    if (pal %in% names(govuk_divergents)) {
-      out_pal <- unname(govuk_divergents[[pal]])
-    } else if (pal == "chart-white") {
-      stop("chart-white cannot be used for sequential palettes")
-    } else if (pal %in% names(govuk_colours)) {
-      out_pal <- scales::gradient_n_pal(
-        c(govuk_colours[pal], govuk_colours["chart-white"]),
-        values = c(1, 0))(c(1, 1/3))
-    } else {
-      stop("pal must be one of: categorical, blue, blrd, blrd_dark, blyl, putq,",
-           " or the name of a colour in govuk_colours.")
-    }
+  } else if (pal %in% names(govuk_divergents)) {
+    out_pal <- unname(govuk_divergents[[pal]])
+  } else if (pal %in% names(govuk_colours)) {
+    out_pal <- scales::gradient_n_pal(
+      c(govuk_colours[pal], govuk_colours["chart-white"]),
+      values = c(1, 0))(c(1, 1/3))
   }
 
   return(out_pal)
