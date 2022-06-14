@@ -144,11 +144,21 @@ build_hugo <- function(with_rmd = TRUE, rmd_folder = "R/Rmd", rebuild = FALSE) {
 
 #' @export
 govukhugo_knit <- function(input, ...) {
+  curr_rlang_backtrace <- getOption(
+    "rlang_backtrace_on_error"
+  )
+  options(
+    rlang_backtrace_on_error = "none"
+  )
   cli::cli(
     cli::cli_abort(
-      "You cannot knit govukhugo Rmd files",
-      i = "Use govukhugo::build_hugo_rmd() instead"
+      c(x = "You cannot knit govukhugo Rmd files",
+        i = "Use govukhugo::build_hugo_rmd() instead"),
+
     )
+  )
+  options(
+    rlang_backtrace_on_error = curr_rlang_backtrace
   )
 }
 
