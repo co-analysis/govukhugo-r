@@ -142,6 +142,16 @@ build_hugo <- function(with_rmd = TRUE, rmd_folder = "R/Rmd", rebuild = FALSE) {
 
 }
 
+#' @export
+govukhugo_knit <- function(input, ...) {
+  cli::cli(
+    cli::cli_abort(
+      "You cannot knit govukhugo Rmd files",
+      i = "Use govukhugo::build_hugo_rmd() instead"
+    )
+  )
+}
+
 
 # function to read the hashlog as a vector
 read_md5_log <- function(file) {

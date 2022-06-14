@@ -1,5 +1,6 @@
 ---
 title: "Page title"
+knit: govukhugo::govukhugo_knit
 date: 2021-01-01
 section: section
 weight: 100
