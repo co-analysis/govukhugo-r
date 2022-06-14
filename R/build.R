@@ -138,9 +138,10 @@ build_hugo <- function(with_rmd = TRUE, rmd_folder = "R/Rmd", rebuild = FALSE) {
   cli::cli_h1("Building Hugo site")
 
   # call hugo
-  system("hugo")
+  blogdown::hugo_build()
 
 }
+
 
 # function to read the hashlog as a vector
 read_md5_log <- function(file) {
