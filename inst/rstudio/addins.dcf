@@ -1,9 +1,15 @@
-Name: Build Rmd and run Hugo
+Name: Build Rmd files and run Hugo
 Description: Convert Rmd documents and run the Hugo build
 Binding: build_hugo
 Interactive: false
 
-Name: Build Rmd files for Hugo
+Name: Build Rmd files
 Description: Convert Rmd documents to govukhugo format
 Binding: build_hugo_rmd
 Interactive: false
+
+Name: Serve a govukhugo site
+Description: Serve the Hugo site in your browser
+Binding: serve_site
+Interactive: false
+
