@@ -2,15 +2,18 @@
 % Please edit documentation in R/serve.R
 \name{serve_site}
 \alias{serve_site}
+\alias{stop_server}
 \title{Serve the site}
 \usage{
 serve_site(
-  ...,
-  .site_dir = NULL,
   build_rmd = TRUE,
   rmd_folder = "R/Rmd",
-  rebuild = FALSE
+  rebuild = FALSE,
+  drafts = TRUE,
+  future = TRUE
 )
+
+stop_server()
 }
 \arguments{
 \item{...}{Arguments passed to \code{\link[servr:server_config]{servr::server_config()}}}
@@ -18,7 +21,12 @@ serve_site(
 \item{.site_dir}{Directory to search for site configuration file, defaults to \code{\link[base:getwd]{base::getwd()}}.}
 }
 \description{
-This is a wrapper around \code{\link[blogdown:serve_site]{blogdown::serve_site()}}. It's main
-purpose is to ensure that the blogdown re-knitting process doesn't
-run when files are saved.
+These are wrappers around \code{\link[blogdown:serve_site]{blogdown::serve_site()}} and \code{\link[blogdown:serve_site]{blogdown::stop_server()}}.
+The main purpose is to ensure that the blogdown re-knitting process doesn't
+run when files are saved. \code{stop_server()} is a simple re-export.
 }
+\section{Functions}{
+\itemize{
+\item \code{stop_server}: Stop serving a Hugo site
+}}
+

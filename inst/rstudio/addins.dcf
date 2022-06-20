@@ -13,3 +13,8 @@ Description: Serve the Hugo site in your browser
 Binding: serve_site
 Interactive: false
 
+Name: Stop server
+Description: Stop serving a Hugo site
+Binding: stop_server
+Interactive: false
+
