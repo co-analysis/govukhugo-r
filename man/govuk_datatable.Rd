@@ -10,7 +10,7 @@ govuk_datatable(
   element_id = NULL,
   col_names = NULL,
   page_length = 10,
-  search = TRUE,
+  search = FALSE,
   small_text = FALSE,
   buttons = TRUE,
   col_defs = NULL,
