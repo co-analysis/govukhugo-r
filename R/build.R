@@ -6,9 +6,15 @@
 #' to override this. By default it expects Rmd files in the `R/Rmd` folder.
 #'
 #' @param rmd_folder path to the folder containing Rmd files
+#' @param save whether to save open RStudio source files before build
 #'
 #' @export
-build_hugo_rmd <- function(rmd_folder = "R/Rmd", rebuild = FALSE) {
+build_hugo_rmd <- function(rmd_folder = "R/Rmd", rebuild = FALSE, save = TRUE) {
+
+  # check if in RStudio
+  if (Sys.getenv("RSTUDIO") == "1") {
+    rstudioapi::documentSaveAll()
+  }
 
   # get rmd files
   rmd_files <- dir(rmd_folder, pattern = "\\.Rmd", full.names = TRUE,
