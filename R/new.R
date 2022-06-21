@@ -5,6 +5,12 @@
 #' allows you to open a new RStudio editor with a copy of the
 #' skeleton via the console.
 #'
+#' @param title The page title
+#' @param date The page date
+#' @param section The section the page will go in
+#' @param weight The page weight
+#' @param summary A summary of the page
+#'
 #' @export
 new_rmd <- function(title = NULL, date = NULL, section = NULL,
                     weight = NULL, summary = NULL) {

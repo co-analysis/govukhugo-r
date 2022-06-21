@@ -10,6 +10,8 @@ build_hugo(with_rmd = TRUE, rmd_folder = "R/Rmd", rebuild = FALSE)
 \item{with_rmd}{logical flag for whether to build Rmd files}
 
 \item{rmd_folder}{path to the folder containing Rmd files}
+
+\item{rebuild}{whether to rebuild all files}
 }
 \description{
 \code{build_hugo()} Hugo-ifies Rmd files and then calls Hugo to build the

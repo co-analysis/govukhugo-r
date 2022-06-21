@@ -13,7 +13,7 @@ data_dir <- function(alt_path = NULL) {
 
   if (!is.null(alt_path)) {
     # return supplied path if provided
-    out_path <- path
+    out_path <- alt_path
   } else if (interactive()) {
     # if editing Rmarkdown set as the R/data folder
     out_path <- here::here("R", "data")

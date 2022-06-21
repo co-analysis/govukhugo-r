@@ -1,3 +1,4 @@
+#' @describeIn govuk_palette GOV.UK colour palette
 #' @export
 govuk_colours <- c(
   "red" = "#d4351c",

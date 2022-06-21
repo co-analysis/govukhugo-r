@@ -4,12 +4,16 @@
 #' govuk-hugo theme to apply GOV.UK CSS classes to the output.
 #'
 #' @param data the data frame to display
+#' @param title a title/caption for the table
 #' @param element_id optionally, an id for the resulting HTML chunk
 #' @param col_names optionally, a vector of column names, otherwise the names of the data object
 #' @param page_length the number of rows to show per page, default is 10
+#' @param search whether to include the search box
 #' @param small_text whether to render the table content with a smaller font
 #' @param buttons whether to include copy and download buttons
 #' @param col_defs optionally, a list of column definitions
+#' @param copy_info information to include when copying the file
+#' @param export_file the file name for the exported csv
 #' @param options optionally, a list of additional options to pass to [DT::datatable()]
 #'
 #' @export

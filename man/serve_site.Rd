@@ -16,9 +16,15 @@ serve_site(
 stop_server()
 }
 \arguments{
-\item{...}{Arguments passed to \code{\link[servr:server_config]{servr::server_config()}}}
+\item{build_rmd}{whether to build Rmd files before serving}
 
-\item{.site_dir}{Directory to search for site configuration file, defaults to \code{\link[base:getwd]{base::getwd()}}.}
+\item{rmd_folder}{the folder containing Rmd files}
+
+\item{rebuild}{whether to trigger a rebuild of all Rmd files}
+
+\item{drafts}{whether to include drafts}
+
+\item{future}{whether to include pages with a date in the future}
 }
 \description{
 These are wrappers around \code{\link[blogdown:serve_site]{blogdown::serve_site()}} and \code{\link[blogdown:serve_site]{blogdown::stop_server()}}.

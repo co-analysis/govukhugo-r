@@ -12,6 +12,17 @@ new_rmd(
   summary = NULL
 )
 }
+\arguments{
+\item{title}{The page title}
+
+\item{date}{The page date}
+
+\item{section}{The section the page will go in}
+
+\item{weight}{The page weight}
+
+\item{summary}{A summary of the page}
+}
 \description{
 The govukhugo package includes a skeleton Rmarkdown file,
 which can be easily selected via the RStudio GUI. \code{new_rmd()}

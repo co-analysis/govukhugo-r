@@ -4,8 +4,14 @@
 #' HTML, it will place the Hugo-ified HTML files into the content sections
 #' designated in the Rmd YAML front matter. Use [render_rmd()] if you want
 #' to override this. By default it expects Rmd files in the `R/Rmd` folder.
+#' The default behaviour is to only build files that are changed, which is
+#' tracked using the `rmd.log` file that is created/stored in the `rmd_folder`,
+#' you can force the building of all pages by setting `rebuild = TRUE`. If
+#' working in RStudio the process will save all open source editors windows
+#' before running.
 #'
 #' @param rmd_folder path to the folder containing Rmd files
+#' @param rebuild whether to rebuild all Rmd files
 #' @param save whether to save open RStudio source files before build
 #'
 #' @export
@@ -87,7 +93,7 @@ build_hugo_rmd <- function(rmd_folder = "R/Rmd", rebuild = FALSE, save = TRUE) {
   for (rmd in rmd_files) {
 
     # if md5sum unchanged don't render
-    if (rebuild | !govukhugo:::check_md5(rmd, rmd_log)) {
+    if (rebuild | !check_md5(rmd, rmd_log)) {
       out <- govukhugo::render_rmd(rmd, tmp_dir = tmp_dir)
       processed_out <- c(processed_out, out)
       processed_rmd <- c(processed_rmd, rmd)
@@ -132,6 +138,7 @@ build_hugo_rmd <- function(rmd_folder = "R/Rmd", rebuild = FALSE, save = TRUE) {
 #'
 #' @param with_rmd logical flag for whether to build Rmd files
 #' @param rmd_folder path to the folder containing Rmd files
+#' @param rebuild whether to rebuild all files
 #'
 #' @export
 build_hugo <- function(with_rmd = TRUE, rmd_folder = "R/Rmd", rebuild = FALSE) {
@@ -148,6 +155,9 @@ build_hugo <- function(with_rmd = TRUE, rmd_folder = "R/Rmd", rebuild = FALSE) {
 
 }
 
+#' @describeIn build_hugo_rmd Don't directly knit govukhugo documents
+#' @param input recieved Rmd file
+#' @param ... knitr fluff
 #' @export
 govukhugo_knit <- function(input, ...) {
   curr_rlang_backtrace <- getOption(

@@ -22,17 +22,25 @@ govuk_datatable(
 \arguments{
 \item{data}{the data frame to display}
 
+\item{title}{a title/caption for the table}
+
 \item{element_id}{optionally, an id for the resulting HTML chunk}
 
 \item{col_names}{optionally, a vector of column names, otherwise the names of the data object}
 
 \item{page_length}{the number of rows to show per page, default is 10}
 
+\item{search}{whether to include the search box}
+
 \item{small_text}{whether to render the table content with a smaller font}
 
 \item{buttons}{whether to include copy and download buttons}
 
 \item{col_defs}{optionally, a list of column definitions}
+
+\item{copy_info}{information to include when copying the file}
+
+\item{export_file}{the file name for the exported csv}
 
 \item{options}{optionally, a list of additional options to pass to \code{\link[DT:datatable]{DT::datatable()}}}
 }

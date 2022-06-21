@@ -72,9 +72,9 @@ render_svg <- function(plot, width, height, units = "px",
 
   # check ggplot2 version
   # if less than 3.3.5 convert px units to mm
-  ggplot_version <- as.character(packageVersion("ggplot2"))
+  ggplot_version <- as.character(utils::packageVersion("ggplot2"))
 
-  if (compareVersion(ggplot_version, "3.3.5") == -1) {
+  if (utils::compareVersion(ggplot_version, "3.3.5") == -1) {
     if (units == "px") {
       width <- width * (25.4/dpi)
       height <- height * (25.4/dpi)

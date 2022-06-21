@@ -82,7 +82,7 @@ init_govuk_hugo <- function() {
 
     if (theme_download == 1) {
       tmp_theme <- tempfile()
-      download.file("https://github.com/co-analysis/govuk-hugo/archive/refs/heads/main.zip",
+      utils::download.file("https://github.com/co-analysis/govuk-hugo/archive/refs/heads/main.zip",
                     destfile = tmp_theme)
       utils::unzip(tmp_theme, exdir = "themes")
       fs::file_move("themes/govuk-hugo-main", "themes/govukhugo")
